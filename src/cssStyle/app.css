@@ -1,0 +1,20 @@
+.App{
+    width: 100%;
+    height: 95vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    background-color: #eaedec;
+    border: 1px solid #000000;
+    width: 400px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    
+}

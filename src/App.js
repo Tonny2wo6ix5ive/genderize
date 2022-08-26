@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import style from "./cssStyle/app.css";
+import { useEffect } from "react";
+import Axios from "axios";
 
 function App() {
+
+const [name, setName] = useState("");
+const [url, setUrl] = useState([]);
+
+useEffect(()=>{
+  Axios.get("https://api.genderize.io/?name=" + name).then((value)=>{
+    setUrl([
+      value.data["name"],
+      value.data["gender"],
+      value.data["probability"],
+      value.data["count"]
+    ])
+  })
+})
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <form>
+        <input type="text" onChange={(event)=>{
+          setName(event.target.value);
+        }}/>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <ul>
+            <li>Name: {url[0]}</li>
+            <li>Gender: {url[1]}</li>
+            <li>Probability: {url[2]}</li>
+            <li>Count: {url[3]}</li>
+          </ul>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </form>
     </div>
   );
 }
